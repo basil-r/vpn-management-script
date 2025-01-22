@@ -1,0 +1,69 @@
+#!/usr/bin/bash
+
+CONFIGURATION_FILE=~/.client.ovpn
+
+show_help() {
+    echo "Usage: $0 [OPTION]"
+    echo "Options:"
+    echo "  i          Import configuration"
+    echo "  s          Start VPN session"
+    echo "  r          Restart VPN session"
+    echo "  p          Pause VPN session"
+    echo "  e          Resume VPN session"
+    echo "  d          Disconnect VPN session"
+    echo "  dp         Disconnect VPN session by session path"
+    echo "  c          Clean up VPN sessions"
+    echo "  l          List VPN sessions"
+    echo "  h, help    Display this help message"
+}
+
+case $1 in
+  "i")
+    echo "Running the 'import' command..."
+    openvpn3 config-import --config $CONFIGURATION_FILE --persistent
+    openvpn3 configs-list
+    ;;
+  "s")
+    echo "Running the 'start' command..."
+    openvpn3 session-start --config $CONFIGURATION_FILE
+    openvpn3 sessions-list
+    ;;
+  "r")
+    echo "Running the 'restart' command..."
+    openvpn3 session-manage --config $CONFIGURATION_FILE --restart
+    ;;
+  "p")
+    echo "Running the 'pause' command..."
+    openvpn3 session-manage --config $CONFIGURATION_FILE --pause
+    ;;
+  "e")
+    echo "Running the 'resume' command..."
+    openvpn3 session-manage --config $CONFIGURATION_FILE --resume
+    ;;
+  "d")
+    echo "Running the 'disconnect' command..."
+    openvpn3 session-manage --config $CONFIGURATION_FILE --disconnect
+    openvpn3 sessions-list
+    ;;
+  "dp")
+    echo "Running the 'disconnect' command... by session path"
+    openvpn3 session-manage --session-path /net/openvpn/v3/sessions/$2 --disconnect
+    openvpn3 sessions-list
+    ;;
+  "c")
+    echo "Running the 'clean' command..."
+    openvpn3 session-manage --cleanup
+    ;;
+  "l")
+    echo "Running the 'list' command..."
+    openvpn3 sessions-list
+    ;;
+  "h" | "help")
+    show_help
+    ;;
+  *)
+    echo "Invalid command. Please use 'i', 's', 'r', 'p', 'e', 'd', 'c', 'dp', 'l' or 'h', 'help'."
+    ;;
+esac
+
+exit
