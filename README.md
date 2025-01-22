@@ -45,7 +45,7 @@ Before using this script, make sure you have the following:
 Clone this repository to your local machine:
 
 ```bash
-git clone https://github.com/yourusername/yourrepo.git
+git clone https://github.com/basil-r/vpn-management-script.git
 ```
 
 ### Step 2: Place the Script in Your `bin` Folder
@@ -67,7 +67,7 @@ mkdir -p ~/bin
 3. Copy the script to the `bin` folder:
 
 ```bash
-cp /path/to/downloaded/vpn ~/bin/
+cp /path/to/downloaded/vpn-management-script/vpn ~/bin/
 ```
 
 4. Make the script executable:
