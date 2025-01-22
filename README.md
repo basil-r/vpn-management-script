@@ -73,8 +73,10 @@ cp /path/to/downloaded/vpn-management-script/vpn ~/bin/
 4. Make the script executable:
 
 ```bash
-chmod +x ~/bin/vpn
+chmod 700 ~/bin/vpn
 ```
+
+This command ensures that only your user can execute the script, and no other users on the system will have access to it.
 
 ### Step 3: Update the `PATH` Variable (if needed)
 
